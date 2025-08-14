@@ -1,13 +1,12 @@
 import React from "react";
-import cartImg from "../assets/cart.jpg";
+import registerImg from "../assets/register.png";
 import userImg from "../assets/user.png";
 import googleImg from "../assets/google.png";
 import EyeImg from "../assets/eye.png";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 
 
-const LoginPage = () => {
+const RegisterPage = () => {
 
     const navigate = useNavigate();
 
@@ -32,7 +31,7 @@ const LoginPage = () => {
         </h2>
         <p className="text-sm text-gray-500 mb-3">
           Don’t have account?{" "}
-          <Link to="/register" className="text-orange-500 underline">Sign up here</Link>
+          <Link to="/signup" className="text-orange-500 underline">Sign up here</Link>
 
         </p>
 
@@ -99,7 +98,7 @@ const LoginPage = () => {
       {/* Right Section (Image) */}
       <div className="w-[70%] h-full">
         <img
-          src={cartImg}
+          src={registerImg}
           alt="Login"
           className="w-full h-full object-cover"
         />
@@ -108,4 +107,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

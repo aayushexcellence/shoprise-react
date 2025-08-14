@@ -1,10 +1,12 @@
 import React from "react";
-import { Menu, ChevronDown, Search } from "lucide-react";
+import { Menu, ChevronDown, Mail, Bell  } from "lucide-react";
 import searchImg from "../assets/search.png"
+import profileImg from "../assets/Profil.png"
 import { useNavigate } from "react-router-dom";
 
 
-const Header = () => {
+
+const  signinHeader= () => {
     const navigate = useNavigate();
 
   return (
@@ -26,12 +28,17 @@ const Header = () => {
         </nav>
 
         {/* Right: Sign In */}
-        <button
-          onClick={() => navigate("/signin")}
-          className="bg-[#1F3A93] hover:bg-[#15307A] text-white px-6 py-2 rounded-full text-sm"
-        >
-          Sign In
-        </button>
+        <div className="flex items-center gap-4">
+        <Mail className="w-5 h-5 text-gray-700 cursor-pointer" />
+        <Bell className="w-5 h-5 text-gray-700 cursor-pointer" onClick={() => navigate("/notifications")}/>
+        <span className="text-l font-medium text-[#333]">John DOE</span>
+        <img
+            src={profileImg}
+            alt="User"
+            className="w-10 h-10 rounded-full object-cover"
+        />
+        </div>
+
       </div>
 
       {/* Bottom Row */}
@@ -75,4 +82,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default signinHeader;
