@@ -39,48 +39,83 @@ const notifications = [
   },
 ];
 
-const NotificationPanel = () => {
+const NotificationDrawer = ({ onClose }) => {
   return (
-    <div className="max-w-sm mx-auto bg-white rounded-xl shadow-md border border-[#D3D3D3] overflow-hidden font-sans">
-      {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-[#D3D3D3]">
-        <div className="flex items-center gap-2">
-          <span className="font-semibold text-lg text-[#333333]">Notifications</span>
-          <span className="bg-[#1F3A9340] text-[#1F3A93] text-xs font-semibold px-2 py-0.5 rounded-full">
-            {notifications.length}
-          </span>
-        </div>
-        <button className="text-sm text-[#FF7F50] font-medium hover:underline">
-          Mask all as unread
-        </button>
-      </div>
+    <>
+      {/* Background overlay: blurred & semi-transparent */}
+      <div
+        onClick={onClose}
+        className="fixed inset-0 z-40 bg-black/20"
+      />
 
-      {/* Notifications List */}
-      <ul>
-        {notifications.map((item, idx) => (
-          <li
-            key={idx}
-            className="px-4 py-3 border-t first:border-t-0 border-[#D3D3D3] hover:bg-gray-50 transition"
+      {/* Notification Drawer */}
+      <div
+        className="
+          fixed top-[64px] right-0
+          w-full max-w-[350px]
+          h-[calc(100vh-64px)]
+          bg-white shadow-xl z-50 border-l border-[#D3D3D3] rounded-tl-2xl rounded-bl-2xl
+          flex flex-col
+          sm:rounded-2xl
+          sm:top-[64px]
+        "
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-[#D3D3D3]">
+          <div className="flex items-center gap-2">
+            <span className="font-semibold text-lg text-[#333333] truncate">
+              Notifications
+            </span>
+            <span className="bg-[#1F3A9340] text-[#1F3A93] text-xs font-semibold px-2 py-0.5 rounded-full">
+              {notifications.length}
+            </span>
+          </div>
+          <button
+            onClick={() => {
+              /* Your logic to mark all as unread */
+            }}
+            className="text-sm text-[#FF7F50] font-medium hover:underline whitespace-nowrap"
           >
-            <h4 className="text-[#1F3A93] font-semibold text-sm mb-1">{item.title}</h4>
-            <p className="text-sm text-[#333333]">{item.message}</p>
-            <div className="flex justify-between items-center text-xs text-[#333333] mt-2">
-              <span>1 hour ago</span>
-              <span className="flex items-center gap-1 text-sm">
-                {item.status === "Unread" && (
-                    <span className="w-1 h-1 rounded-full bg-[#1F3A93]"></span>
-                )}
-                <span className={item.status === "Unread" ? "text-[#1F3A93] font-medium" : "text-[#1F3A93]"}>
-                    {item.status}
-                </span>
-                </span>
+            Mark all as unread
+          </button>
+        </div>
 
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+        {/* Notification List */}
+        <div className="overflow-y-auto flex-1">
+          <ul>
+            {notifications.map((item, idx) => (
+              <li
+                key={idx}
+                className="px-5 py-3 border-t first:border-t-0 border-[#D3D3D3] hover:bg-gray-50 transition"
+              >
+                <h4 className="text-[#1F3A93] font-semibold text-sm mb-1 truncate">
+                  {item.title}
+                </h4>
+                <p className="text-sm text-[#333333] truncate">{item.message}</p>
+                <div className="flex justify-between items-center text-xs text-[#333333] mt-2">
+                  <span>1 hour ago</span>
+                  <span className="flex items-center gap-1 text-sm">
+                    {item.status === "Unread" && (
+                      <span className="w-1 h-1 rounded-full bg-[#1F3A93]"></span>
+                    )}
+                    <span
+                      className={
+                        item.status === "Unread"
+                          ? "text-[#1F3A93] font-medium"
+                          : "text-[#1F3A93]"
+                      }
+                    >
+                      {item.status}
+                    </span>
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </>
   );
 };
 
-export default NotificationPanel;
+export default NotificationDrawer;

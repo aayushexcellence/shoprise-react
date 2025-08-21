@@ -1,105 +1,106 @@
 import React from "react";
-import cartImg from "../assets/cart.jpg";
+import registerImg from "../assets/register.png";
 import userImg from "../assets/user.png";
 import googleImg from "../assets/google.png";
 import EyeImg from "../assets/eye.png";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { AiOutlineEyeInvisible } from "react-icons/ai";
 
 const LoginPage = () => {
-
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
-    <div className="flex w-screen h-screen overflow-hidden">
+    <div className="flex flex-col md:flex-row w-full min-h-screen">
       {/* Left Section */}
-      <div className="flex flex-col justify-center items-center w-[30%] h-full px-8 bg-white relative">
+      <div className="flex flex-col justify-between items-center w-full md:w-[30%] px-4 sm:px-6 md:px-8 py-6 bg-white relative">
         {/* Logo */}
-        <div className="flex items-center gap-2 absolute top-6 left-6">
-          <div className="w-10 h-10 rounded-full bg-gray-300"></div>
-          <span className="font-semibold text-lg">ShopRise</span>
+        <div className="flex items-center gap-2 absolute top-4 left-4">
+          <div className="w-8 h-8 rounded-full bg-gray-300"></div>
+          <span className="font-semibold text-base">ShopRise</span>
         </div>
 
-        {/* Icon */}
-        <div className="text-blue-500 text-5xl mb-4">
-          <img src={userImg} alt="User" />
+        {/* Main Content */}
+        <div className="flex flex-col items-center w-full mt-20">
+          {/* Icon */}
+          <img src={userImg} alt="User" className="w-5 mb-2" />
+
+          {/* Welcome Text */}
+          <h2 className="text-xl font-semibold text-[#333333] mb-1">
+            Welcome back
+          </h2>
+          <p className="text-sm text-gray-500 mb-3 text-center">
+            Don’t have account?{" "}
+            <Link to="/register" className="text-orange-500 underline">
+              Sign up here
+            </Link>
+          </p>
+
+          {/* Google Sign In */}
+          <button
+            className="flex items-center justify-center gap-2 w-full max-w-[300px] border rounded-md py-1.5 text-sm"
+            style={{ borderColor: "#D3D3D3", color: "#333333" }}
+          >
+            <img src={googleImg} alt="Google" className="w-4" />
+            <span>Sign in with Google</span>
+          </button>
+
+          {/* OR Divider */}
+          <div className="flex items-center w-full max-w-[300px] my-3">
+            <hr className="flex-grow border-gray-300" />
+            <span className="mx-2 text-gray-600 text-sm">or</span>
+            <hr className="flex-grow border-gray-300" />
+          </div>
+
+          {/* Email Input */}
+          <div className="w-full max-w-[300px] relative mb-3 text-xs text-[#333333]">
+            Email
+            <input
+              type="text"
+              placeholder="johndoe@gmail.com"
+              className="placeholder-[#333333] w-full border rounded-md p-2 pr-8 mt-1 text-sm"
+              style={{ borderColor: "#D3D3D3" }}
+            />
+          </div>
+
+          {/* Password */}
+          <div className="w-full max-w-[300px] relative mb-2 text-xs text-[#333333]">
+            Password
+            <input
+              type="password"
+              placeholder="********"
+              className="placeholder-[#333333] w-full border rounded-md p-2 pr-8 mt-1 text-sm"
+              style={{ borderColor: "#D3D3D3" }}
+            />
+            <span className="absolute right-2 top-[30px] text-gray-400 cursor-pointer">
+              <AiOutlineEyeInvisible className="text-[#333333] w-4 h-4" />
+            </span>
+          </div>
+
+          {/* Remember Me & Forgot Password */}
+          <div className="flex justify-between items-center w-full max-w-[300px] text-sm mb-3">
+            <label className="flex items-center gap-2 text-[#333333]">
+              <input type="checkbox" />
+              Remember me
+            </label>
+            <Link to="/change-password" className="underline text-[#1F3A93]">
+              Forgot password
+            </Link>
+          </div>
+
+          {/* Sign In Button */}
+          <button
+            className="w-full max-w-[300px] bg-[#1F3A93] hover:bg-[#15307A] text-white py-2 text-sm rounded-full"
+            onClick={() => navigate("/john-doe")}
+          >
+            Sign in
+          </button>
         </div>
-
-        {/* Welcome text */}
-        <h2 className="text-2xl font-semibold text-[#333333] mb-5">
-          Welcome back
-        </h2>
-        <p className="text-sm text-gray-500 mb-3">
-          Don’t have account?{" "}
-          <Link to="/register" className="text-orange-500 underline">Sign up here</Link>
-
-        </p>
-
-        {/* Google Sign in */}
-        <button
-          className="flex items-center justify-center gap-2 w-full max-w-xs border rounded-md py-2"
-          style={{ borderColor: "#D3D3D3",color:"#333333" }}
-        >
-          <img src={googleImg} alt="Google" />
-          <span>Sign in with Google</span>
-        </button>
-
-        {/* OR Divider */}
-        <div className="flex items-center w-full max-w-xs my-4">
-          <hr className="flex-grow border-gray-300" />
-          <span className="mx-2 text-gray-600">or</span>
-          <hr className="flex-grow border-gray-300" />
-        </div>
-
-        {/* Email */}
-        <div className="w-full max-w-xs relative mb-3 text-sm text-[#333333]">
-          Email
-          <input
-            type="email"
-            placeholder="johndoe@gmail.com"
-            className="placeholder-[#333333] w-full border rounded-md p-2 pr-10 mt-1"
-            style={{ borderColor: "#D3D3D3" }}
-          />
-        </div>
-
-        {/* Password */}
-        <div className="w-full max-w-xs relative mb-3 text-sm text-[#333333]">
-          Password
-          <input
-            type="password"
-            placeholder="********"
-            className="placeholder-[#333333] w-full border rounded-md p-2 pr-10 mt-1"
-            style={{ borderColor: "#D3D3D3" }}
-          />
-          <span className="absolute right-3 top-9 text-gray-400 cursor-pointer">
-            <img src={EyeImg} alt="eye" />
-          </span>
-        </div>
-
-        {/* Remember me & Forgot password */}
-        <div className="flex justify-between items-center w-full max-w-xs my-3 text-sm">
-          <label className="flex items-center gap-2 text-[#333333]">
-            <input type="checkbox" />
-            Remember me
-          </label>
-        <Link to="/change-password" className="underline text-[#1F3A93] text-sm">Forgot password</Link>
-        </div>
-
-        {/* Sign in Button */}
-        <button
-          className="w-full max-w-xs hover:bg-blue-800 text-white py-2 mt-1 rounded-full"
-          style={{ backgroundColor: "#1F3A93" }}
-          onClick={() => navigate("/john-doe")}
-        >
-          Sign in
-        </button>
       </div>
 
       {/* Right Section (Image) */}
-      <div className="w-[70%] h-full">
+      <div className="hidden md:block w-full md:w-[70%] h-full">
         <img
-          src={cartImg}
+          src={registerImg}
           alt="Login"
           className="w-full h-full object-cover"
         />

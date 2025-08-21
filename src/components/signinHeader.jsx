@@ -1,85 +1,102 @@
-import React from "react";
-import { Menu, ChevronDown, Mail, Bell  } from "lucide-react";
-import searchImg from "../assets/search.png"
-import profileImg from "../assets/Profil.png"
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Mail, Bell } from "lucide-react";
+import profileImg from "../assets/Profil.png";
+import { useNavigate, NavLink } from "react-router-dom";
+import ChatDrawer from "./ChatDrawer";
+import NotificationDrawer from "./notifications";
 
-
-
-const  signinHeader= () => {
-    const navigate = useNavigate();
+const SigninHeader = () => {
+  const navigate = useNavigate();
+  const [showChat, setShowChat] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
 
   return (
-    <header className="w-full border-b border-[#D3D3D3] bg-white font-inter text-[#333]">
+    <header className="w-full bg-white font-inter text-[#333]">
       {/* Top Row */}
       <div className="flex items-center justify-between px-4 md:px-8 py-3">
         {/* Left: Logo */}
-        <div className="flex items-center gap-2">
+        <div
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={() => navigate("/dashboard")}
+        >
           <div className="w-9 h-9 rounded-full bg-[#D3D3D3]" />
-          <span className="text-lg font-semibold">ShopRise</span>
+          <span className="text-lg font-semibold hidden sm:inline-block">
+            ShopRise
+          </span>
         </div>
 
         {/* Center: Main Nav */}
-        <nav className="hidden md:flex gap-8 text-sm">
-          <a href="#" className="text-[#FF7F50] font-medium">All listing</a>
-          <a href="#" className="hover:text-black">About us</a>
-          <a href="#" className="hover:text-black">FAQ</a>
-          <a href="#" className="hover:text-black">Blog</a>
+        <nav className="hidden md:flex gap-6 text-sm flex-1 justify-center">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive
+                ? "text-[#FF7F50] font-medium"
+                : "text-gray-700 hover:text-black font-medium"
+            }
+          >
+            All listing
+          </NavLink>
+          <NavLink
+            to="/about-us"
+            className={({ isActive }) =>
+              isActive
+                ? "text-[#FF7F50] font-medium"
+                : "text-gray-700 hover:text-black font-medium"
+            }
+          >
+            About us
+          </NavLink>
+          <NavLink
+            to="/faq"
+            className={({ isActive }) =>
+              isActive
+                ? "text-[#FF7F50] font-medium"
+                : "text-gray-700 hover:text-black"
+            }
+          >
+            FAQ
+          </NavLink>
+          <NavLink
+            to="/blog"
+            className={({ isActive }) =>
+              isActive
+                ? "text-[#FF7F50] font-medium"
+                : "text-gray-700 hover:text-black"
+            }
+          >
+            Blog
+          </NavLink>
         </nav>
 
-        {/* Right: Sign In */}
-        <div className="flex items-center gap-4">
-        <Mail className="w-5 h-5 text-gray-700 cursor-pointer" />
-        <Bell className="w-5 h-5 text-gray-700 cursor-pointer" onClick={() => navigate("/notifications")}/>
-        <span className="text-l font-medium text-[#333]">John DOE</span>
-        <img
+        {/* Right: Icons and User */}
+        <div className="flex items-center gap-3 md:gap-4">
+          <Mail
+            className="w-5 h-5 text-gray-700 cursor-pointer"
+            onClick={() => setShowChat(true)}
+          />
+          {showChat && <ChatDrawer onClose={() => setShowChat(false)} />}
+
+          <Bell
+            className="w-5 h-5 text-gray-700 cursor-pointer"
+            onClick={() => setShowNotifications(true)}
+          />
+          {showNotifications && (
+            <NotificationDrawer onClose={() => setShowNotifications(false)} />
+          )}
+
+          <span className="text-sm font-medium text-[#333] hidden sm:inline-block truncate max-w-[100px] md:max-w-[150px]">
+            John DOE
+          </span>
+          <img
             src={profileImg}
             alt="User"
-            className="w-10 h-10 rounded-full object-cover"
-        />
-        </div>
-
-      </div>
-
-      {/* Bottom Row */}
-      <div className="flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-8 py-3 border-t border-[#D3D3D3]">
-        {/* Left: Categories & Filters */}
-        <div className="flex flex-wrap items-center gap-4 md:gap-6 text-sm mb-3 md:mb-0">
-          <button className="flex items-center gap-2 text-black">
-            <Menu size={18} />
-            Categories
-            <ChevronDown size={14} />
-          </button>
-
-          <span className="h-6 w-px bg-gray-400 hidden md:inline-block" />
-
-          <a href="#" className="hover:text-black">For you</a>
-          <a href="#" className="hover:text-black">Local</a>
-          <a href="#" className="hover:text-black">Selling</a>
-          <a href="#" className="hover:text-black">Buying</a>
-
-          <button className="flex items-center gap-1 text-black">
-            More
-            <ChevronDown size={14} />
-          </button>
-        </div>
-
-        {/* Right: Search Bar */}
-        <div className="flex items-center border border-gray-300 rounded-full overflow-hidden w-full md:w-auto max-w-full">
-          <div className="px-3 text-gray-500">
-            <img src={searchImg} alt="" />
-          </div>
-          <input
-            type="text"
-            className="px-2 py-2.5 text-sm outline-none flex-grow min-w-0 "
+            className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover"
           />
-          <button className="bg-[#FF7F50] text-white px-4 py-2 text-sm rounded-full mr-0.5">
-            Search
-          </button>
         </div>
       </div>
     </header>
   );
 };
 
-export default signinHeader;
+export default SigninHeader;
